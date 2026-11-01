@@ -419,6 +419,49 @@ footer{border-top:1px solid rgba(51,58,50,0.08);padding:56px 0 32px;color:var(--
 .btn-cod{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;color:var(--savia);border:1px solid rgba(83,107,80,0.35);font:600 10px var(--ff-cuerpo);letter-spacing:.16em;text-transform:uppercase;padding:11px 16px;border-radius:var(--radio);margin-top:10px;cursor:pointer;transition:background .25s,color .25s,border-color .25s;width:100%}
 .btn-cod:hover{background:var(--savia);border-color:var(--savia);color:var(--blanco)}
 
+/* ============ Clon formulario Releasit nevora ============ */
+/* Resumen de producto */
+.cod-prod{display:flex;gap:14px;align-items:center;padding:14px;background:var(--blanco);border:1px solid rgba(51,58,50,0.1);border-radius:10px;margin-bottom:20px}
+.cod-prod-media{position:relative;flex:none}
+.cod-prod-img{width:64px;height:64px;border-radius:8px;background:var(--savia-niebla) center/cover no-repeat}
+.cod-prod-qty{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;padding:0 5px;border-radius:999px;background:var(--savia);color:var(--blanco);border:2px solid var(--blanco);font:700 11px/18px var(--ff-cuerpo);text-align:center}
+.cod-prod-info{flex:1;min-width:0}
+.cod-prod-name{font:600 14px/1.4 var(--ff-cuerpo);color:var(--grafito);margin-bottom:5px}
+.cod-prod-prices{display:flex;flex-wrap:wrap;align-items:baseline;gap:7px}
+.cod-prod-orig{font:400 12px var(--ff-cuerpo);color:var(--texto-secundario);text-decoration:line-through}
+.cod-prod-final{font:700 14px var(--ff-cuerpo);color:var(--savia)}
+
+/* Método de envío */
+.cod-ship{margin-bottom:14px}
+.cod-ship-label{display:block;font:600 10px var(--ff-cuerpo);letter-spacing:.2em;text-transform:uppercase;color:var(--texto-secundario);margin-bottom:10px}
+.cod-ship-item{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid rgba(51,58,50,0.14);border-radius:10px;cursor:pointer;margin-bottom:8px;transition:border-color .2s,background .2s}
+.cod-ship-item:hover{border-color:rgba(83,107,80,0.4)}
+.cod-ship-item:has(input:checked){border-color:var(--savia);background:rgba(83,107,80,0.05)}
+.cod-ship-item input{accent-color:var(--savia);flex:none}
+.cod-ship-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.cod-ship-title{font:600 13.5px var(--ff-cuerpo);color:var(--grafito)}
+.cod-ship-desc{font:400 12px var(--ff-cuerpo);color:var(--texto-secundario)}
+.cod-ship-price{font:700 13px var(--ff-cuerpo);color:var(--grafito);flex:none}
+
+/* Textos trust / section / help */
+.cod-trust{font:600 12px var(--ff-cuerpo);color:var(--savia);background:rgba(83,107,80,0.06);border-radius:8px;padding:10px 14px;margin:0 0 22px;text-align:center}
+.cod-section{font:600 16px var(--ff-titular);color:var(--grafito);margin:0 0 6px}
+.cod-help{font:400 12px/1.5 var(--ff-cuerpo);color:var(--texto-secundario);margin:0 0 14px;display:block}
+.cod-field .cod-help{margin:6px 0 0}
+.req{color:#A23030}
+
+/* Fila de dos columnas */
+.cod-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:480px){.cod-row{grid-template-columns:1fr;gap:0}}
+
+/* Totales */
+.cod-totals{border-top:1px solid rgba(51,58,50,0.12);margin-top:22px;padding-top:16px}
+.cod-tot-row{display:flex;justify-content:space-between;align-items:baseline;font:400 13.5px var(--ff-cuerpo);color:var(--texto-secundario);margin-bottom:8px}
+.cod-tot-row span:last-child{font-weight:600;color:var(--grafito)}
+.cod-tot-final{font:600 15px var(--ff-cuerpo);color:var(--grafito);margin:10px 0 0;padding-top:10px;border-top:1px solid rgba(51,58,50,0.08)}
+.cod-tot-final span:last-child{font:700 18px var(--ff-titular);color:var(--savia)}
+.cod-commit{font:400 11.5px/1.55 var(--ff-cuerpo);color:var(--texto-secundario);margin:14px 0 0;text-align:center}
+
 /* Utilidades */
 .center{text-align:center}
 .suave{color:var(--texto-secundario)}

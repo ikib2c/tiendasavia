@@ -323,52 +323,161 @@
   </div>
 </div>
 
-<!-- Formulario COD estilo Releasit -->
+<!-- Formulario COD clon Releasit nevora -->
 <div class="cod-overlay" id="codOverlay" onclick="cerrarCOD()"></div>
 <div class="cod-modal" id="codModal">
   <div class="cod-h">
-    <h3>Pedir contra entrega</h3>
-    <button class="cod-close" onclick="cerrarCOD()">✕</button>
+    <h3>Completa tu pedido</h3>
+    <button class="cod-close" onclick="cerrarCOD()" aria-label="Cerrar">✕</button>
   </div>
   <div class="cod-body">
     <form id="codForm">
-      <div class="cod-field">
-        <label>Nombre completo</label>
-        <input type="text" id="codNombre" placeholder="Juan Pérez" required>
+      <!-- Resumen del producto -->
+      <div class="cod-prod">
+        <div class="cod-prod-media">
+          <div class="cod-prod-img" id="codProdImg"></div>
+          <span class="cod-prod-qty" id="codProdQty">1</span>
+        </div>
+        <div class="cod-prod-info">
+          <div class="cod-prod-name" id="codProdName"></div>
+          <div class="cod-prod-prices">
+            <span class="cod-prod-orig" id="codProdOrig"></span>
+            <span class="cod-prod-final" id="codProdFinal"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Método de envío -->
+      <div class="cod-ship">
+        <span class="cod-ship-label">Método de envío</span>
+        <label class="cod-ship-item">
+          <input type="radio" name="shippingRate" value="gratis" checked>
+          <span class="cod-ship-text">
+            <span class="cod-ship-title">Envío gratis</span>
+            <span class="cod-ship-desc">Entrega en 3 a 5 días hábiles</span>
+          </span>
+          <span class="cod-ship-price">Gratis</span>
+        </label>
+        <label class="cod-ship-item">
+          <input type="radio" name="shippingRate" value="prioritario">
+          <span class="cod-ship-text">
+            <span class="cod-ship-title">Envío prioritario</span>
+            <span class="cod-ship-desc">Recibe tu pedido lo antes posible</span>
+          </span>
+          <span class="cod-ship-price">$5.000</span>
+        </label>
+      </div>
+      <p class="cod-trust">Paga al recibir. Sin anticipos.</p>
+
+      <!-- Datos de entrega -->
+      <p class="cod-section">¿Dónde recibes tu pedido?</p>
+      <p class="cod-help">Escribe tu dirección completa para facilitar la entrega.</p>
+
+      <div class="cod-row">
+        <div class="cod-field">
+          <label>Nombre <span class="req">*</span></label>
+          <input type="text" id="codNombre" placeholder="Nombre" required>
+        </div>
+        <div class="cod-field">
+          <label>Apellido <span class="req">*</span></label>
+          <input type="text" id="codApellido" placeholder="Apellido" required>
+        </div>
       </div>
       <div class="cod-field">
-        <label>Teléfono de contacto</label>
-        <input type="tel" id="codTelefono" placeholder="+57 300 000 0000" required>
+        <label>Celular / WhatsApp <span class="req">*</span></label>
+        <input type="tel" id="codTelefono" placeholder="Tu número de celular" required>
+        <span class="cod-help">Recibirás la confirmación y la guía por WhatsApp.</span>
       </div>
       <div class="cod-field">
-        <label>Dirección de envío</label>
-        <input type="text" id="codDireccion" placeholder="Calle 123 #45-67" required>
+        <label>Dirección de entrega <span class="req">*</span></label>
+        <input type="text" id="codDireccion" placeholder="Ej. Calle 45 #13-25, casa o apartamento" required>
+      </div>
+      <div class="cod-row">
+        <div class="cod-field">
+          <label>Departamento <span class="req">*</span></label>
+          <select id="codDepartamento">
+            <option value="">Departamento</option>
+            <option value="AMAZONAS">AMAZONAS</option>
+            <option value="ANTIOQUIA">ANTIOQUIA</option>
+            <option value="ARAUCA">ARAUCA</option>
+            <option value="ARCHIPIELAGO DE SAN ANDRES, PROVIDENCIA Y SANTA CATALINA">ARCHIPIELAGO DE SAN ANDRES</option>
+            <option value="ATLANTICO">ATLANTICO</option>
+            <option value="BOLIVAR">BOLIVAR</option>
+            <option value="BOYACA">BOYACA</option>
+            <option value="CALDAS">CALDAS</option>
+            <option value="CAQUETA">CAQUETA</option>
+            <option value="CASANARE">CASANARE</option>
+            <option value="CAUCA">CAUCA</option>
+            <option value="CESAR">CESAR</option>
+            <option value="CHOCO">CHOCO</option>
+            <option value="CORDOBA">CORDOBA</option>
+            <option value="CUNDINAMARCA">CUNDINAMARCA</option>
+            <option value="GUAINIA">GUAINIA</option>
+            <option value="GUAVIARE">GUAVIARE</option>
+            <option value="HUILA">HUILA</option>
+            <option value="LA GUAJIRA">LA GUAJIRA</option>
+            <option value="MAGDALENA">MAGDALENA</option>
+            <option value="META">META</option>
+            <option value="NARINO">NARINO</option>
+            <option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option>
+            <option value="PUTUMAYO">PUTUMAYO</option>
+            <option value="QUINDIO">QUINDIO</option>
+            <option value="RISARALDA">RISARALDA</option>
+            <option value="SANTANDER">SANTANDER</option>
+            <option value="SUCRE">SUCRE</option>
+            <option value="TOLIMA">TOLIMA</option>
+            <option value="VALLE DEL CAUCA">VALLE DEL CAUCA</option>
+            <option value="VAUPES">VAUPES</option>
+            <option value="VICHADA">VICHADA</option>
+          </select>
+        </div>
+        <div class="cod-field">
+          <label>Ciudad <span class="req">*</span></label>
+          <input type="text" id="codCiudad" placeholder="Ciudad" required>
+        </div>
       </div>
       <div class="cod-field">
-        <label>Ciudad</label>
-        <input type="text" id="codCiudad" placeholder="Bogotá" required>
+        <label>Barrio / Referencia (opcional)</label>
+        <input type="text" id="codNota" placeholder="#Casa / Torre / Apto / Barrio o Referencia">
       </div>
-      <div class="cod-field">
-        <label>Producto</label>
-        <input type="text" id="codProducto" readonly>
+      <div class="cod-row">
+        <div class="cod-field">
+          <label>Color del envase</label>
+          <select id="codColor"></select>
+        </div>
+        <div class="cod-field">
+          <label>Cantidad</label>
+          <input type="number" id="codCantidad" value="1" min="1" max="99">
+        </div>
       </div>
-      <div class="cod-field">
-        <label>Cantidad</label>
-        <input type="number" id="codCantidad" value="1" min="1" max="99">
-      </div>
-      <div class="cod-field">
-        <label>Color del envase</label>
-        <select id="codColor"></select>
-      </div>
+
+      <!-- Upsells -->
       <div class="cod-upsell">
         <h4>¿Agregar un producto más?</h4>
         <div id="codUpsells"></div>
       </div>
+
+      <!-- Totales -->
+      <div class="cod-totals">
+        <div class="cod-tot-row" id="codRowDesc" style="display:none">
+          <span>Descuentos</span><span id="codDescuentos">-$0</span>
+        </div>
+        <div class="cod-tot-row">
+          <span>Subtotal</span><span id="codSubtotal">$0</span>
+        </div>
+        <div class="cod-tot-row">
+          <span>Envío</span><span id="codEnvio">Gratis</span>
+        </div>
+        <div class="cod-tot-row cod-tot-final">
+          <span>Total</span><span id="codTotal">$0</span>
+        </div>
+      </div>
+      <p class="cod-commit">Al confirmar, te comprometes a recibir y pagar tu pedido en la entrega.</p>
     </form>
   </div>
   <div class="cod-actions">
     <button class="cod-btn-cerrar" onclick="cerrarCOD()">Cerrar</button>
-    <button class="cod-btn-cod" id="codBtnEnviar">Pedir contra entrega</button>
+    <button class="cod-btn-cod" id="codBtnEnviar">Confirmar pedido</button>
   </div>
 </div>
 

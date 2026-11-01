@@ -190,36 +190,89 @@
     track.scrollBy({left: scrollAmount * dir, behavior: 'smooth'});
   }
 
-  // ============ Formulario COD estilo Releasit ============
+  // ============ Formulario COD clon Releasit nevora ============
   let codProductoId = null;
-  let codCantidad = 1;
   let codColor = '';
   let codUpsellIds = new Set();
+
+  function codCantidadActual(){
+    const inp = document.getElementById('codCantidad');
+    return inp ? Math.max(1, parseInt(inp.value)||1) : 1;
+  }
+  function codEnvioActual(){
+    const radio = document.querySelector('input[name="shippingRate"]:checked');
+    return radio && radio.value === 'prioritario' ? 5000 : 0;
+  }
+
+  function actualizarTotalesCOD(){
+    const p = catalogo.find(x=>x.id===codProductoId);
+    if(!p) return;
+    const cantidad = codCantidadActual();
+    const subtotal = p.p * cantidad;
+    let descuentos = 0;
+    if(p.pOrig && p.pOrig > p.p) descuentos = (p.pOrig - p.p) * cantidad;
+    let upsellsSum = 0;
+    codUpsellIds.forEach(uid=>{
+      const up = catalogo.find(x=>x.id===uid);
+      if(up) upsellsSum += up.p;
+    });
+    const envio = codEnvioActual();
+    const total = subtotal + upsellsSum + envio;
+
+    const qty = document.getElementById('codProdQty');
+    if(qty) qty.textContent = cantidad;
+    const sub = document.getElementById('codSubtotal');
+    if(sub) sub.textContent = fmt(subtotal + upsellsSum);
+    const rowDesc = document.getElementById('codRowDesc');
+    const desc = document.getElementById('codDescuentos');
+    if(rowDesc && desc){
+      if(descuentos > 0){ rowDesc.style.display='flex'; desc.textContent = '-' + fmt(descuentos); }
+      else rowDesc.style.display='none';
+    }
+    const env = document.getElementById('codEnvio');
+    if(env) env.textContent = envio > 0 ? fmt(envio) : 'Gratis';
+    const tot = document.getElementById('codTotal');
+    if(tot) tot.textContent = fmt(total);
+  }
 
   function abrirCOD(id){
     const p = catalogo.find(x=>x.id===id);
     if(!p) return;
     codProductoId = id;
-    codCantidad = 1;
     codColor = Object.keys(p.color||{})[0] || '';
+    codUpsellIds = new Set();
 
-    document.getElementById('codProducto').value = p.n;
-    document.getElementById('codCantidad').value = codCantidad;
-    document.getElementById('codNombre').value = '';
-    document.getElementById('codTelefono').value = '';
-    document.getElementById('codDireccion').value = '';
-    document.getElementById('codCiudad').value = '';
+    // Resumen del producto (clon Releasit)
+    const img = document.getElementById('codProdImg');
+    if(img) img.style.backgroundImage = `url('${p.imgs[0]}')`;
+    const nom = document.getElementById('codProdName');
+    if(nom) nom.textContent = p.n;
+    const orig = document.getElementById('codProdOrig');
+    if(orig) orig.textContent = (p.pOrig && p.pOrig > p.p) ? fmt(p.pOrig) : '';
+    const fin = document.getElementById('codProdFinal');
+    if(fin) fin.textContent = fmt(p.p);
+    const qtyBadge = document.getElementById('codProdQty');
+    if(qtyBadge) qtyBadge.textContent = '1';
+
+    // Reset campos
+    const campos = ['codNombre','codApellido','codTelefono','codDireccion','codCiudad','codNota'];
+    campos.forEach(c=>{ const el=document.getElementById(c); if(el) el.value=''; });
+    const depto = document.getElementById('codDepartamento');
+    if(depto) depto.value='';
+    const cant = document.getElementById('codCantidad');
+    if(cant) cant.value = 1;
+    const shipGratis = document.querySelector('input[name="shippingRate"][value="gratis"]');
+    if(shipGratis) shipGratis.checked = true;
 
     const colorSel = document.getElementById('codColor');
     colorSel.innerHTML='';
     Object.entries(p.color||{}).forEach(([nombre,hex])=>{
       const o=document.createElement('option');
       o.value=nombre;
-      o.textContent=nombre + ' (' + hex + ')';
+      o.textContent=nombre;
       if(nombre===codColor) o.selected=true;
       colorSel.appendChild(o);
     });
-    codColor = Object.keys(p.color||{})[0] || '';
 
     // Upsells: productos relacionados (misma categoría, excluyendo el actual)
     const upsells = document.getElementById('codUpsells');
@@ -239,9 +292,12 @@
       const chk = item.querySelector('input');
       chk.onchange=(e)=>{
         if(e.target.checked) codUpsellIds.add(r.id); else codUpsellIds.delete(r.id);
+        actualizarTotalesCOD();
       };
       upsells.appendChild(item);
     });
+
+    actualizarTotalesCOD();
 
     const overlay=$('#codOverlay'), modal=$('#codModal');
     if(overlay&&modal){ overlay.classList.add('open'); modal.classList.add('open'); document.body.classList.add('noscroll'); }
@@ -254,44 +310,60 @@
 
   function enviarCOD(){
     const nombre=document.getElementById('codNombre').value.trim();
+    const apellido=document.getElementById('codApellido').value.trim();
     const telefono=document.getElementById('codTelefono').value.trim();
     const direccion=document.getElementById('codDireccion').value.trim();
+    const departamento=document.getElementById('codDepartamento').value;
     const ciudad=document.getElementById('codCiudad').value.trim();
-    const cantidad=document.getElementById('codCantidad').value;
+    const nota=document.getElementById('codNota').value.trim();
     const color=document.getElementById('codColor').value;
+    const cantidad=codCantidadActual();
 
-    if(!nombre||!telefono||!direccion||!ciudad){
-      alert('Por favor completa todos los campos.');
+    if(!nombre||!apellido||!telefono||!direccion||!departamento||!ciudad){
+      alert('Por favor completa todos los campos obligatorios (*).');
       return;
     }
 
     const p = catalogo.find(x=>x.id===codProductoId);
     if(!p) return;
 
+    const envio = codEnvioActual();
+    const envioTxt = envio > 0 ? fmt(envio) : 'Gratis';
+    const envioNombre = envio > 0 ? 'Envío prioritario' : 'Envío gratis';
+    let upsellsSum = 0;
+    let upsellsTxt = '';
+    if(codUpsellIds.size > 0){
+      codUpsellIds.forEach(uid=>{
+        const up=catalogo.find(x=>x.id===uid);
+        if(up){ upsellsTxt += `- ${up.n} — ${fmt(up.p)}%0A`; upsellsSum += up.p; }
+      });
+    }
+    const subtotal = p.p * cantidad + upsellsSum;
+    let descuentos = 0;
+    if(p.pOrig && p.pOrig > p.p) descuentos = (p.pOrig - p.p) * cantidad;
+    const total = subtotal + envio;
+
     const wa = cfg.tienda && cfg.tienda.whatsappPedidos ? cfg.tienda.whatsappPedidos : '573007579993';
-    let texto = `*Nuevo pedido COD (Releasit)*%0A%0A`;
-    texto += `*Cliente:* ${nombre}%0A`;
-    texto += `*Teléfono:* ${telefono}%0A`;
-    texto += `*Dirección:* ${direccion}, ${ciudad}%0A%0A`;
-    texto += `*Producto:* ${p.n}%0A`;
+    let texto = `*Nuevo pedido COD — SAVIA*%0A%0A`;
+    texto += `*Cliente:* ${nombre} ${apellido}%0A`;
+    texto += `*Celular / WhatsApp:* ${telefono}%0A`;
+    texto += `*Dirección:* ${direccion}%0A`;
+    texto += `*Departamento:* ${departamento}%0A`;
+    texto += `*Ciudad:* ${ciudad}%0A`;
+    if(nota) texto += `*Referencia:* ${nota}%0A`;
+    texto += `%0A*Producto:* ${p.n}%0A`;
     texto += `*Color:* ${color}%0A`;
     texto += `*Cantidad:* ${cantidad}%0A`;
     texto += `*Precio unitario:* ${fmt(p.p)}%0A`;
-    texto += `*Subtotal:* ${fmt(p.p*cantidad)}%0A%0A`;
-    if(codUpsellIds.size>0){
-      texto += `*Productos adicionales:*%0A`;
-      let upSub=0;
-      codUpsellIds.forEach(uid=>{
-        const up=catalogo.find(x=>x.id===uid);
-        if(up){ texto += `- ${up.n} — ${fmt(up.p)}%0A`; upSub+=up.p; }
-      });
-      texto += `*Subtotal upsells:* ${fmt(upSub)}%0A%0A`;
-      texto += `*Total:* ${fmt(p.p*cantidad + upSub)}%0A%0A`;
-    } else {
-      texto += `*Total:* ${fmt(p.p*cantidad)}%0A%0A`;
+    if(upsellsTxt){
+      texto += `%0A*Productos adicionales:*%0A${upsellsTxt}`;
     }
+    texto += `%0A*Subtotal:* ${fmt(subtotal)}%0A`;
+    if(descuentos > 0) texto += `*Descuentos:* -${fmt(descuentos)}%0A`;
+    texto += `*${envioNombre}:* ${envioTxt}%0A`;
+    texto += `*TOTAL:* ${fmt(total)}%0A%0A`;
     texto += `*Método de pago:* Contra entrega%0A%0A`;
-    texto += `Quisiera proceder con el pago contra entrega.`;
+    texto += `Al confirmar, me comprometo a recibir y pagar mi pedido en la entrega.`;
 
     location.href = `https://wa.me/${wa}?text=${texto}`;
     cerrarCOD();
@@ -383,7 +455,14 @@
     window.abrirCOD=abrirCOD;
     window.cerrarCOD=cerrarCOD;
     window.enviarCOD=enviarCOD;
+    window.actualizarTotalesCOD=actualizarTotalesCOD;
     $('#codBtnEnviar') && $('#codBtnEnviar').addEventListener('click',enviarCOD);
+    // Totales en vivo: cantidad y método de envío
+    const codCant = $('#codCantidad');
+    if(codCant) codCant.addEventListener('input',actualizarTotalesCOD);
+    document.querySelectorAll('input[name="shippingRate"]').forEach(r=>{
+      r.addEventListener('change',actualizarTotalesCOD);
+    });
   });
 
   // Exponer para uso inline en producto.html
