@@ -1,5 +1,6 @@
 /* ============================================================
    SAVIA — Sistema de diseño (basado en brief_branding_SAVIA_actualizado.md §5)
+   Estructura adaptada de nevora.com.co (Shopify)
    Colores: verde #536B50 | niebla #DCE4D5 | marfil #F4EFE5 | arena #C6A98B | grafito #333A32
    Tipografía: Cormorant Garamond (títulos) + DM Sans (cuerpo/botones)
    ============================================================ */
@@ -27,7 +28,7 @@
   --ff-titular:"Cormorant Garamond", serif;
   --ff-cuerpo:"DM Sans", sans-serif;
 
-  --radio:12px;
+  --radio:2px;           /* nevora usa esquinas muy suaves/casi cuadradas */
   --radio-pill:999px;
   --espacio-xs:8px;
   --espacio-sm:16px;
@@ -58,11 +59,17 @@ p{margin:0}
 .section-title{font:600 28px/1.25 var(--ff-titular);color:var(--grafito);text-align:center;margin-bottom:8px}
 .section-sub{color:var(--texto-secundario);text-align:center;font-size:15px;max-width:620px;margin:0 auto 32px}
 
-/* ============ Barra superior (topbar) ============ */
-.topbar{
-  background:var(--grafito);color:rgba(244,239,229,0.85);
-  text-align:center;padding:8px 12px;font:500 13px var(--ff-cuerpo);letter-spacing:.02em
+/* ============ Topbar nevora (marquee) ============ */
+.nv-bar{
+  width:100%;background:#0a2e22;height:42px;display:flex;align-items:center;overflow:hidden;font-family:"DM Sans",-apple-system,sans-serif
 }
+.nv-marquee{display:flex;white-space:nowrap;animation:nv-scroll 34s linear infinite}
+.nv-marquee:hover{animation-play-state:paused}
+.nv-set{display:flex;align-items:center;flex-shrink:0}
+.nv-set span{font-size:12px;font-weight:400;letter-spacing:0.26em;text-transform:uppercase;color:#e8f0ec;padding:0 26px}
+.nv-dot{color:#5a9e7e!important;font-size:9px!important;letter-spacing:0!important;padding:0!important}
+@keyframes nv-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media (max-width:600px){.nv-set span{font-size:10.5px;letter-spacing:0.18em;padding:0 18px}}
 
 /* ============ Header / Navegación ============ */
 #header{position:sticky;top:0;z-index:60;background:rgba(244,239,229,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--borde)}
@@ -104,6 +111,32 @@ p{margin:0}
 .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px}
 
 /* ============ Botones ============ */
+.button{
+  --shadow-horizontal-offset:var(--buttons-shadow-horizontal-offset);
+  --shadow-vertical-offset:var(--buttons-shadow-vertical-offset);
+  --shadow-blur-radius:var(--buttons-shadow-blur-radius);
+  --shadow-opacity:var(--buttons-shadow-opacity);
+  --border-offset:var(--buttons-border-offset);
+  --border-opacity:calc(1 - var(--buttons-border-opacity));
+  border-radius:var(--buttons-radius-outset);
+  position:relative;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  border:0;
+  padding:0 3rem;
+  font:inherit;
+  text-decoration:none;
+  color:rgb(var(--color-button-text));
+  transition:box-shadow var(--duration-short) ease;
+  -webkit-appearance:none;
+  appearance:none;
+  background-color:rgba(var(--color-button),var(--alpha-button-background));
+  font-weight:700;
+  z-index:0
+}
+.button span{position:relative;z-index:2}
+
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   min-height:48px;padding:0 28px;border-radius:var(--radio-pill);
@@ -117,33 +150,47 @@ p{margin:0}
 .btn.ghost{background:transparent;color:var(--texto-secundario)}
 .btn.ghost:hover{background:rgba(51,58,50,0.06)}
 
-/* ============ Categorías (burbujas) ============ */
-.cats{padding:40px 0 10px}
-#catsTrack{display:grid;grid-auto-flow:column;grid-auto-columns:104px;gap:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:6px 2px 14px;scrollbar-width:none}
-#catsTrack::-webkit-scrollbar{display:none}
-.bub{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;padding:0;cursor:pointer;scroll-snap-align:start}
-.bub .bp{width:88px;height:88px;border-radius:50%;border:2px solid var(--borde);background:var(--blanco) center/cover no-repeat;display:grid;place-items:center;transition:transform .25s,box-shadow .25s}
-.bub:hover .bp{transform:translateY(-3px);box-shadow:var(--sombra-suave)}
-.bub .bl{font:600 12.5px/1.3 var(--ff-cuerpo);max-width:100%;text-align:center;white-space:normal;height:36px;overflow:hidden;color:var(--grafito)}
+/* ============ Tarjetas nevora (nvc-card) ============ */
+.nvc-card{
+  position:relative;
+  background:var(--blanco);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:transform .3s,box-shadow .3s
+}
+.nvc-card:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
+.nvc-card__media{
+  position:relative;
+  background:var(--savia-niebla);
+  aspect-ratio:4/5;
+  overflow:hidden
+}
+.nvc-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.nvc-badge{
+  position:absolute;top:10px;left:10px;z-index:3;
+  background:#fffffff2;color:var(--grafito);font:600 10.5px var(--ff-cuerpo);
+  letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)
+}
+.nvc-badge--top{top:10px;left:10px}
+.nvc-card__body{padding:16px 14px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.nvc-card__title{font:600 16px/1.25 var(--ff-titular);color:var(--grafito);margin:0 0 6px}
+.nvc-card__title a{color:inherit;text-decoration:none}
+.nvc-card__benefit{font-size:13px;color:var(--texto-secundario);margin:0 0 8px}
+.nvc-card__price{display:flex;align-items:baseline;gap:8px;font:600 18px var(--ff-titular);color:var(--grafito);margin:0 0 8px}
+.nvc-card__price ant{font-size:13px;color:var(--texto-secundario);text-decoration:line-through}
+.nvc-card__cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:transparent;color:var(--grafito);border:1.5px solid var(--grafito);
+  font:600 13px var(--ff-cuerpo);padding:10px 18px;border-radius:var(--radio-pill);
+  margin-top:auto;text-decoration:none;transition:background .2s,color .2s
+}
+.nvc-card__cta:hover{background:rgba(51,58,50,0.04)}
 
-/* ============ Grid de productos ============ */
+/* Grid de productos */
 .grid-productos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;margin-top:26px}
-.product-card{cursor:pointer;border-radius:18px;overflow:hidden;background:var(--blanco);border:1px solid var(--borde);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
-.product-card:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
-.product-card .ph{position:relative;background:var(--blanco);display:grid;place-items:center;overflow:hidden;aspect-ratio:4/5}
-.product-card .ph img{width:100%;height:100%;object-fit:contain;transition:transform .5s}
-.product-card .info{padding:16px 14px 12px;display:flex;flex-direction:column;gap:6px}
-.product-card .linea{font:600 11px var(--ff-cuerpo);letter-spacing:.12em;text-transform:uppercase;color:var(--savia);margin-bottom:6px;display:block}
-.product-card h3{font:600 16px/1.25 var(--ff-titular);color:var(--grafito);margin:0 0 6px}
-.product-card .precio{display:flex;align-items:baseline;gap:8px;font:600 18px var(--ff-titular);color:var(--grafito);margin:0 0 10px}
-.product-card .precio ant{font-size:13px;color:var(--texto-secundario);text-decoration:line-through}
-.product-card .etiqueta{display:inline-flex;align-items:center;gap:6px;background:var(--savia-suave);color:var(--savia);border-radius:var(--radio-pill);padding:4px 10px;font:600 10.5px var(--ff-cuerpo);text-transform:uppercase;letter-spacing:.06em}
-
-/* Filtros / acciones de listado */
-.chead{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
-.clab{display:inline-flex;align-items:center;gap:8px;font:700 14.5px var(--ff-titular);letter-spacing:.04em;text-transform:uppercase}
-.clab::before{content:"";width:5px;height:16px;border-radius:3px;background:var(--savia)}
-.cmeta{font:500 12.5px var(--ff-cuerpo);color:var(--mu,var(--texto-secundario))}
 
 /* ============ Rutinas ============ */
 .rutinas{background:var(--fondo-secundario)}
@@ -155,7 +202,7 @@ p{margin:0}
 .rutina-card p{font-size:14.5px;color:var(--texto-secundario);margin-bottom:14px}
 .rutina-card .btn{width:100%;font-size:13px;padding:0 14px}
 
-/* ============ Ficha de producto (producto.html) ============ */
+/* ============ Ficha de producto (producto.html) — estilo nevora ============ */
 .producto{padding:40px 0 60px}
 .producto-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;max-width:1180px;margin:0 auto;padding:0 26px}
 .producto-galeria{position:sticky;top:90px}
@@ -167,8 +214,8 @@ p{margin:0}
 .producto .mini img:hover{opacity:1;transform:translateY(-2px)}
 
 .producto-info{}
-.producto .linea{font:600 11px var(--ff-cuerpo);letter-spacing:.14em;text-transform:uppercase;color:var(--savia);margin-bottom:10px;display:block}
-.producto h1{font:600 30px/1.2 var(--ff-titular);color:var(--grafito);margin:0 0 10px}
+.nv-eyebrow{font:500 12px var(--ff-cuerpo);letter-spacing:.16em;text-transform:uppercase;color:var(--savia);margin-bottom:8px;display:block}
+.producto h1{font:600 clamp(26px,4vw,34px)/1.2 var(--ff-titular);color:var(--grafito);margin:0 0 10px}
 .producto .precio{display:flex;align-items:baseline;gap:10px;font:600 26px var(--ff-titular);color:var(--grafito);margin:0 0 6px}
 .producto .precio ant{font-size:15px;color:var(--texto-secundario);text-decoration:line-through}
 .producto .etiqueta{display:inline-flex;align-items:center;gap:6px;background:var(--savia-suave);color:var(--savia);border-radius:var(--radio-pill);padding:4px 10px;font:600 10.5px var(--ff-cuerpo);margin-bottom:16px}
@@ -185,6 +232,12 @@ p{margin:0}
 .color-chip.active .tick{opacity:1}
 .color-preview{display:inline-flex;align-items:center;gap:10px;margin-top:10px}
 .color-preview .swatch{width:20px;height:20px;border-radius:50%;border:2px solid var(--borde)}
+
+/* Urgencia nevora */
+.nv-urgency{
+  margin-top:16px;padding:12px 16px;background:var(--savia-suave);border-radius:var(--radio);
+  font:500 13px var(--ff-cuerpo);color:var(--grafito);display:flex;align-items:center;gap:8px
+}
 
 /* Cantidad y acciones */
 .actions{margin-top:26px;display:flex;gap:12px;align-items:center}

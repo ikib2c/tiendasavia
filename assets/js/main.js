@@ -143,19 +143,21 @@
     const slice = lista.slice(inicio, inicio+estado.porPagina);
     grid.innerHTML='';
     slice.forEach(p=>{
-      const colorDefecto = Object.keys(p.color||{})[0]||'';
       const etiqueta = p.destacado?'Destacado':p.nuevo?'Nuevo':'';
       const dtext = dtoText(p.p, p.pOrig);
       const el=document.createElement('article');
-      el.className='product-card';
+      el.className='nvc-card';
       el.onclick=()=>location.href=`producto.html?id=${p.id}`;
       el.innerHTML = `
-        <div class="ph"><img src="${p.imgs[0]}" alt="${p.n}" loading="lazy"></div>
-        <div class="info">
-          ${p.destacado||p.nuevo?`<span class="etiqueta">${etiqueta}${dtext?' · '+dtext:''}</span>`:''}
-          <span class="linea">${p.linea}</span>
-          <h3>${p.n}</h3>
-          <div class="precio">${fmt(p.p)}${p.pOrig?' <ant>'+fmt(p.pOrig)+'</ant> <span style="color:var(--savia);font-weight:700">'+dtext+'</span>':''}</div>
+        <div class="nvc-card__media">
+          <img src="${p.imgs[0]}" alt="${p.n}" loading="lazy">
+          ${p.destacado||p.nuevo?`<span class="nvc-badge">${etiqueta}</span>`:''}
+        </div>
+        <div class="nvc-card__body">
+          <h3 class="nvc-card__title"><a href="producto.html?id=${p.id}">${p.n}</a></h3>
+          <p class="nvc-card__benefit">${p.desc}</p>
+          <div class="nvc-card__price">${fmt(p.p)}${p.pOrig?' <ant>'+fmt(p.pOrig)+'</ant>':''}</div>
+          <a class="nvc-card__cta" href="producto.html?id=${p.id}">Ver oferta${dtext?' · '+dtext:''}</a>
         </div>`;
       grid.appendChild(el);
     });

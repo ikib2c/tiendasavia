@@ -18,12 +18,30 @@
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
 
-<div class="topbar">Envío gratis en toda Colombia&nbsp;·&nbsp;Pago contra entrega&nbsp;·&nbsp;Skincare botánico</div>
+<!-- Topbar nevora -->
+<div class="nv-bar">
+  <div class="nv-marquee">
+    <div class="nv-set">
+      <span>Envío gratis en toda Colombia</span><span class="nv-dot">✦</span>
+      <span>Paga contra entrega</span><span class="nv-dot">✦</span>
+      <span>Productos importados premium</span><span class="nv-dot">✦</span>
+      <span>Skincare botánico contemporáneo</span><span class="nv-dot">✦</span>
+    </div>
+    <div class="nv-set" aria-hidden="true">
+      <span>Envío gratis en toda Colombia</span><span class="nv-dot">✦</span>
+      <span>Paga contra entrega</span><span class="nv-dot">✦</span>
+      <span>Productos importados premium</span><span class="nv-dot">✦</span>
+      <span>Skincare botánico contemporáneo</span><span class="nv-dot">✦</span>
+    </div>
+  </div>
+</div>
 
 <header id="header">
   <div class="hd">
     <a class="brand" href="index.html">
       <img src="img/logo-savia.svg" alt="SAVIA">
+      <span class="bt">SAVIA<br><span style="font:400 10px/1.2 'DM Sans',sans-serif;color:#6b645a;display:block;margin-top:2px">Skincare botánico</span></span>
+    </a>
     <div class="search">
       <input type="search" id="searchInput" placeholder="Buscar productos" aria-label="Buscar productos">
     </div>
@@ -42,6 +60,8 @@
   </div>
   <ul class="mm-list">
     <li><button onclick="closeMM();window.location.href='index.html'">Inicio</button></li>
+    <li><button onclick="closeMM();window.location.href='index.html#tienda'">Catálogo</button></li>
+    <li><button onclick="closeMM();window.location.href='index.html#contacto'">Contacto</button></li>
   </ul>
   <div class="mm-foot">
     <a class="mm-wa" href="https://wa.me/573007579993?text=Hola%20SAVIA,%20quiero%20una%20recomendaci%C3%B3n" target="_blank">Pedir por WhatsApp</a>
@@ -62,20 +82,24 @@
         <div class="miniaturas" id="miniaturas"></div>
       </div>
 
-      <!-- Información -->
+      <!-- Información — estilo nevora -->
       <div class="producto-info">
-        <span class="linea" id="prodLinea">Línea</span>
+        <span class="nv-eyebrow" id="prodEyebrow">Línea</span>
         <h1 id="prodNombre">Nombre del producto</h1>
+        <p class="desc" id="prodSubtitle">Subtítulo del producto.</p>
+        <ul class="nv-minibens" id="prodMiniBens"></ul>
         <div class="etiqueta chip-line" id="prodEtiqueta" style="display:none">Destacado</div>
         <div class="precio" id="prodPrecio">$0</div>
         <p class="desc" id="prodDesc">Descripción del producto.</p>
 
-        <!-- Personalización de colores -->
+        <!-- Personalización de colores (variantes) -->
         <div class="color-picker">
           <label>Color del envase</label>
           <div class="color-options" id="colorOptions"></div>
           <div class="color-preview"><div class="swatch" id="colorSwatch"></div><span id="colorNombre">—</span></div>
         </div>
+
+        <div class="nv-urgency" id="prodUrgency" style="display:none">Lote importado disponible</div>
 
         <div class="actions">
           <div class="qty">
@@ -176,16 +200,31 @@ if (!producto) {
 } else {
   document.title = producto.n + ' · SAVIA';
   document.getElementById('pageTitle').textContent = producto.n + ' · SAVIA';
-  document.getElementById('prodLinea').textContent = producto.linea;
+  document.getElementById('prodEyebrow').textContent = producto.linea;
   document.getElementById('prodBreadCat').textContent = producto.linea;
   document.getElementById('prodNombre').textContent = producto.n;
+  document.getElementById('prodSubtitle').textContent = producto.desc;
   document.getElementById('prodPrecio').innerHTML = producto.pOrig
     ? `<span style="font-size:15px;color:var(--texto-secundario);text-decoration:line-through;margin-right:8px">${new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.pOrig)}</span>${new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.p)} <span style="color:var(--savia);font-weight:700;font-size:14px;margin-left:6px">-${Math.round(((producto.pOrig-producto.p)/producto.pOrig)*100)}%</span>`
     : new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.p);
   document.getElementById('prodDesc').textContent = producto.desc;
+
   const etiqueta = document.getElementById('prodEtiqueta');
   if (producto.destacado) { etiqueta.style.display='inline-flex'; etiqueta.textContent='Destacado'; }
   if (producto.nuevo) { etiqueta.style.display='inline-flex'; etiqueta.textContent='Nuevo'; }
+
+  // Mini-beneficios estilo nevora
+  const miniBens = document.getElementById('prodMiniBens');
+  producto.beneficios.forEach(b=>{
+    const li=document.createElement('li'); li.textContent=b; miniBens.appendChild(li);
+  });
+
+  // Urgencia (estilo nevora "Lote importado disponible")
+  const urgency = document.getElementById('prodUrgency');
+  if(producto.destacado || producto.nuevo){
+    urgency.style.display='flex';
+    urgency.textContent = producto.nuevo ? 'Lanzamiento disponible' : 'Lote importado disponible';
+  }
 
   const imgPrincipal = document.getElementById('imgPrincipal');
   const miniaturas = document.getElementById('miniaturas');
@@ -234,10 +273,7 @@ if (!producto) {
   if(existing) existing.remove();
   const s = document.createElement('script'); s.type='application/ld+json'; s.text=JSON.stringify(ld); document.head.appendChild(s);
 
-  // Inicializar preview de color
-  const firstHex = Object.values(producto.color)[0];
-  document.getElementById('colorSwatch').style.background=firstHex;
-  document.getElementById('colorNombre').textContent=Object.keys(producto.color)[0];
+  // WhatsApp dinámico con color seleccionado
   function actualizarWhatsApp(){
     const wa = document.getElementById('btnWa');
     const qty = document.getElementById('qty').value;

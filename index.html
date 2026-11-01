@@ -21,7 +21,23 @@
 <body>
 <a class="skip" href="#tienda">Ir a los productos</a>
 
-<div class="topbar">Envío gratis en toda Colombia&nbsp;·&nbsp;Pago contra entrega&nbsp;·&nbsp;Productos importados premium&nbsp;·&nbsp;Skincare botánico</div>
+<!-- Topbar nevora (marquee) -->
+<div class="nv-bar">
+  <div class="nv-marquee">
+    <div class="nv-set">
+      <span>Envío gratis en toda Colombia</span><span class="nv-dot">✦</span>
+      <span>Paga contra entrega</span><span class="nv-dot">✦</span>
+      <span>Productos importados premium</span><span class="nv-dot">✦</span>
+      <span>Skincare botánico contemporáneo</span><span class="nv-dot">✦</span>
+    </div>
+    <div class="nv-set" aria-hidden="true">
+      <span>Envío gratis en toda Colombia</span><span class="nv-dot">✦</span>
+      <span>Paga contra entrega</span><span class="nv-dot">✦</span>
+      <span>Productos importados premium</span><span class="nv-dot">✦</span>
+      <span>Skincare botánico contemporáneo</span><span class="nv-dot">✦</span>
+    </div>
+  </div>
+</div>
 
 <header id="header">
   <div class="hd">
@@ -62,8 +78,8 @@
     <div class="wrap">
       <div class="hero-badge">✦ Envío gratis · Pago contra entrega</div>
       <span class="eyebrow">Skincare botánico contemporáneo</span>
-      <h1>Encuentra lo que <em>tu piel necesita</em>.</h1>
-      <p class="lead">Descubre fórmulas botánicas para descanso, energía, belleza y bienestar diario. Envío gratis y pago contraentrega en Colombia.</p>
+      <h1>Tu piel,<br>en su <em>mejor esencia</em>.</h1>
+      <p class="lead">Descubre una forma consciente de cuidar tu piel con SAVIA. Productos bien formulados, información transparente y una experiencia digital sencilla.</p>
       <div class="hero-cta">
         <a href="#tienda" class="btn savia">Descubre SAVIA</a>
         <a href="#rutinas" class="btn outline">Ver rutinas</a>
@@ -79,35 +95,47 @@
       <h2 class="section-title">Búsquedas frecuentes</h2>
       <p class="section-sub">Elige según lo que tu piel necesita hoy.</p>
       <div class="grid-productos" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px">
-        <a href="#tienda?cat=limpieza" class="product-card" style="text-align:center;padding:16px 8px">
-          <div class="ph" style="aspect-ratio:1;background:var(--savia-niebla)"><div style="font-size:32px">🧼</div></div>
-          <div class="info" style="padding:10px 4px 4px"><h3 style="font-size:14px">Limpieza facial</h3></div>
+        <a href="#tienda?cat=limpieza" class="nvc-card" style="text-align:center">
+          <div class="nvc-card__media"><div style="font-size:32px;display:grid;place-items:center;height:100%">🧼</div></div>
+          <div class="nvc-card__body" style="padding:12px 8px">
+            <h3 class="nvc-card__title" style="font-size:14px">Limpieza facial</h3>
+          </div>
         </a>
-        <a href="#tienda?cat=hidratacion" class="product-card" style="text-align:center;padding:16px 8px">
-          <div class="ph" style="aspect-ratio:1;background:var(--savia-niebla)"><div style="font-size:32px">💧</div></div>
-          <div class="info" style="padding:10px 4px 4px"><h3 style="font-size:14px">Hidratación</h3></div>
+        <a href="#tienda?cat=hidratacion" class="nvc-card" style="text-align:center">
+          <div class="nvc-card__media"><div style="font-size:32px;display:grid;place-items:center;height:100%">💧</div></div>
+          <div class="nvc-card__body" style="padding:12px 8px">
+            <h3 class="nvc-card__title" style="font-size:14px">Hidratación</h3>
+          </div>
         </a>
-        <a href="#tienda?cat=tratamiento" class="product-card" style="text-align:center;padding:16px 8px">
-          <div class="ph" style="aspect-ratio:1;background:var(--savia-niebla)"><div style="font-size:32px">✨</div></div>
-          <div class="info" style="padding:10px 4px 4px"><h3 style="font-size:14px">Tratamientos</h3></div>
+        <a href="#tienda?cat=tratamiento" class="nvc-card" style="text-align:center">
+          <div class="nvc-card__media"><div style="font-size:32px;display:grid;place-items:center;height:100%">✨</div></div>
+          <div class="nvc-card__body" style="padding:12px 8px">
+            <h3 class="nvc-card__title" style="font-size:14px">Tratamientos</h3>
+          </div>
         </a>
-        <a href="#tienda?cat=proteccion" class="product-card" style="text-align:center;padding:16px 8px">
-          <div class="ph" style="aspect-ratio:1;background:var(--savia-niebla)"><div style="font-size:32px">☀️</div></div>
-          <div class="info" style="padding:10px 4px 4px"><h3 style="font-size:14px">Protección solar</h3></div>
+        <a href="#tienda?cat=proteccion" class="nvc-card" style="text-align:center">
+          <div class="nvc-card__media"><div style="font-size:32px;display:grid;place-items:center;height:100%">☀️</div></div>
+          <div class="nvc-card__body" style="padding:12px 8px">
+            <h3 class="nvc-card__title" style="font-size:14px">Protección solar</h3>
+          </div>
         </a>
-        <a href="#tienda?cat=cuidado" class="product-card" style="text-align:center;padding:16px 8px">
-          <div class="ph" style="aspect-ratio:1;background:var(--savia-niebla)"><div style="font-size:32px">🌿</div></div>
-          <div class="info" style="padding:10px 4px 4px"><h3 style="font-size:14px">Cuidado complementario</h3></div>
+        <a href="#tienda?cat=cuidado" class="nvc-card" style="text-align:center">
+          <div class="nvc-card__media"><div style="font-size:32px;display:grid;place-items:center;height:100%">🌿</div></div>
+          <div class="nvc-card__body" style="padding:12px 8px">
+            <h3 class="nvc-card__title" style="font-size:14px">Cuidado complementario</h3>
+          </div>
         </a>
-        <a href="#tienda?cat=kits" class="product-card" style="text-align:center;padding:16px 8px">
-          <div class="ph" style="aspect-ratio:1;background:var(--savia-niebla)"><div style="font-size:32px">🎁</div></div>
-          <div class="info" style="padding:10px 4px 4px"><h3 style="font-size:14px">Kits y rutinas</h3></div>
+        <a href="#tienda?cat=kits" class="nvc-card" style="text-align:center">
+          <div class="nvc-card__media"><div style="font-size:32px;display:grid;place-items:center;height:100%">🎁</div></div>
+          <div class="nvc-card__body" style="padding:12px 8px">
+            <h3 class="nvc-card__title" style="font-size:14px">Kits y rutinas</h3>
+          </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Productos destacados -->
+  <!-- Productos destacados (tarjetas nvc-card estilo nevora) -->
   <section id="tienda" class="section">
     <div class="wrap">
       <div class="chead">
