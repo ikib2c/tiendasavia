@@ -135,6 +135,35 @@
     </div>
   </section>
 
+  <!-- Burbujas de categoría (nevora catsbar) -->
+  <section class="catsbar">
+    <div class="cwrap">
+      <div id="catsTrack"></div>
+    </div>
+  </section>
+
+  <!-- Carrusel de productos destacados (nevora carsec) -->
+  <section class="carsec">
+    <div class="crow">
+      <div class="chead">
+        <span class="clab">Más vendidos</span>
+        <span class="cmeta">Lo más buscado esta semana</span>
+      </div>
+      <div class="ctrack" id="car1"></div>
+      <button class="carr L" onclick="scrollTrack('car1',-1)">‹</button>
+      <button class="carr R" onclick="scrollTrack('car1',1)">›</button>
+    </div>
+    <div class="crow">
+      <div class="chead">
+        <span class="clab">Novedades</span>
+        <span class="cmeta">Llegadas recientes</span>
+      </div>
+      <div class="ctrack" id="car2"></div>
+      <button class="carr L" onclick="scrollTrack('car2',-1)">‹</button>
+      <button class="carr R" onclick="scrollTrack('car2',1)">›</button>
+    </div>
+  </section>
+
   <!-- Productos destacados (tarjetas nvc-card estilo nevora) -->
   <section id="tienda" class="section">
     <div class="wrap">

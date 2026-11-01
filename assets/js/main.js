@@ -167,6 +167,71 @@
 
   function cargarMas(){ estado.pagina++; renderProductos(); }
 
+  // Scroll del carrusel
+  function scrollTrack(id, dir){
+    const track = document.getElementById(id);
+    if(!track) return;
+    const scrollAmount = track.clientWidth * 0.7;
+    track.scrollBy({left: scrollAmount * dir, behavior: 'smooth'});
+  }
+
+  // ============ Categorías (burbujas estilo nevora) ============
+  const CATEGORIAS = [
+    {id:'limpieza', n:'Limpieza facial', icon:'🧼'},
+    {id:'hidratacion', n:'Hidratación', icon:'💧'},
+    {id:'tratamiento', n:'Tratamientos', icon:'✨'},
+    {id:'proteccion', n:'Protección solar', icon:'☀️'},
+    {id:'cuidado', n:'Cuidado complementario', icon:'🌿'},
+    {id:'kits', n:'Kits y rutinas', icon:'🎁'}
+  ];
+
+  function renderCategorias(){
+    const track = $('#catsTrack');
+    if(!track) return;
+    track.innerHTML='';
+    CATEGORIAS.forEach(c=>{
+      const active = estado.filtroCat === c.id ? 'on' : '';
+      const el=document.createElement('button');
+      el.className='bub'+(active?' on':'');
+      el.innerHTML = `
+        <div class="bp" style="background-image:url('img/p/${c.id}.svg')">${c.icon}</div>
+        <div class="bl">${c.n}</div>`;
+      el.onclick=()=>{
+        estado.filtroCat = c.id;
+        estado.pagina = 1;
+        document.querySelectorAll('#catsTrack .bub').forEach(b=>b.classList.remove('on'));
+        el.classList.add('on');
+        renderProductos();
+        window.scrollTo({top:document.getElementById('tienda').offsetTop-100, behavior:'smooth'});
+      };
+      track.appendChild(el);
+    });
+  }
+
+  // ============ Carrusel (nevora carsec) ============
+  function renderCarruseles(){
+    const tracks = document.querySelectorAll('.ctrack[id^="car"]');
+    tracks.forEach((track, i)=>{
+      const start = i * 6;
+      const slice = catalogo.slice(start, start + 6);
+      track.innerHTML='';
+      slice.forEach(p=>{
+        const el=document.createElement('div');
+        el.className='cari';
+        el.onclick=()=>location.href=`producto.html?id=${p.id}`;
+        el.innerHTML = `
+          <div class="cfr">
+            <img src="${p.imgs[0]}" alt="${p.n}" loading="lazy">
+          </div>
+          <div class="cov">
+            <b>${p.n}</b>
+            <span>${fmt(p.p)}</span>
+          </div>`;
+        track.appendChild(el);
+      });
+    });
+  }
+
   // Filtros y búsqueda
   function setupFiltros(){
     const input=$('#searchInput');
@@ -184,6 +249,8 @@
     actualizarBadge();
     setupFiltros();
     renderProductos();
+    renderCategorias();
+    renderCarruseles();
     $('#cartBtn') && $('#cartBtn').addEventListener('click',(e)=>{e.preventDefault();toggleCart();});
     $('#cdCheckout') && $('#cdCheckout').addEventListener('click',(e)=>{e.preventDefault();buildWhatsApp();});
     $('#mmToggle') && $('#mmToggle').addEventListener('click',toggleMM);

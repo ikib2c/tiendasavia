@@ -192,6 +192,39 @@ p{margin:0}
 /* Grid de productos */
 .grid-productos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;margin-top:26px}
 
+/* ============ Burbujas de categoría (nevora catsbar) ============ */
+.catsbar{padding:40px 0 10px}
+.cwrap{position:relative;max-width:1180px;margin:0 auto;padding:0 44px}
+#catsTrack{display:grid;grid-auto-flow:column;grid-auto-columns:104px;gap:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:6px 2px 14px;scrollbar-width:none}
+#catsTrack::-webkit-scrollbar{display:none}
+.bub{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;padding:0;cursor:pointer;scroll-snap-align:start}
+.bub .bp{width:88px;height:88px;border-radius:50%;border:2px solid var(--borde);background:var(--blanco) center/cover no-repeat;display:grid;place-items:center;transition:transform .25s,box-shadow .25s}
+.bub:hover .bp{transform:translateY(-3px);box-shadow:var(--sombra-suave)}
+.bub .bl{font:600 12.5px/1.3 var(--ff-cuerpo);max-width:100%;text-align:center;white-space:normal;height:36px;overflow:hidden;color:var(--grafito)}
+
+/* ============ Carrusel (nevora carsec) ============ */
+.carsec{padding:40px 0 10px}
+.crow{position:relative;max-width:1180px;margin:0 auto;padding:0 26px}
+.chead{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.clab{display:inline-flex;align-items:center;gap:8px;font:700 14.5px var(--ff-titular);letter-spacing:.04em;text-transform:uppercase}
+.clab::before{content:"";width:5px;height:16px;border-radius:3px;background:var(--savia)}
+.cmeta{font:500 12.5px var(--ff-cuerpo);color:var(--texto-secundario)}
+.ctrack{display:grid;grid-auto-flow:column;--cols:2.4;--gap:16px;grid-auto-columns:calc((100% - (var(--cols) - 1)*var(--gap))/var(--cols));gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;padding:6px 2px 14px;scrollbar-width:none}
+.ctrack::-webkit-scrollbar{display:none}
+@media(min-width:700px){.ctrack{--cols:3.4}}
+@media(min-width:1020px){.ctrack{--cols:4.6;--gap:20px}}
+.cnav{display:flex;justify-content:center;gap:8px;margin-top:6px}
+.cdot{width:8px;height:8px;border-radius:999px;border:0;padding:0;background:var(--borde);cursor:pointer;transition:.3s}
+.cdot.on{background:var(--grafito);width:22px}
+.carr{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;background:#fffffff2;color:var(--grafito);display:grid;place-items:center;cursor:pointer;z-index:10;box-shadow:var(--sombra);opacity:0;transition:.3s}
+.crow:hover .carr{opacity:1}
+.carr:hover{transform:translateY(-50%) scale(1.08)}
+.carr.L{left:8px}.carr.R{right:8px}
+.carr[disabled]{opacity:.25!important;pointer-events:none}
+@media(max-width:767px){.carr{display:none}}
+.chint{text-align:center;font-size:12.5px;color:var(--texto-secundario);display:none}
+@media(hover:none){.chint{display:block}}
+
 /* ============ Rutinas ============ */
 .rutinas{background:var(--fondo-secundario)}
 .rutinas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:30px}
