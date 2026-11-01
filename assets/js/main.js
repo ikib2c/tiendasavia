@@ -17,6 +17,11 @@
   function fmt(val){
     return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(val);
   }
+  function dtoText(p, pOrig){
+    if(!pOrig || pOrig<=p) return '';
+    const d = Math.round(((pOrig-p)/pOrig)*100);
+    return `-${d}%`;
+  }
 
   // Guardar carrito
   function guardar(){
@@ -139,16 +144,18 @@
     grid.innerHTML='';
     slice.forEach(p=>{
       const colorDefecto = Object.keys(p.color||{})[0]||'';
+      const etiqueta = p.destacado?'Destacado':p.nuevo?'Nuevo':'';
+      const dtext = dtoText(p.p, p.pOrig);
       const el=document.createElement('article');
       el.className='product-card';
       el.onclick=()=>location.href=`producto.html?id=${p.id}`;
       el.innerHTML = `
         <div class="ph"><img src="${p.imgs[0]}" alt="${p.n}" loading="lazy"></div>
         <div class="info">
+          ${p.destacado||p.nuevo?`<span class="etiqueta">${etiqueta}${dtext?' · '+dtext:''}</span>`:''}
           <span class="linea">${p.linea}</span>
           <h3>${p.n}</h3>
-          <div class="precio">${fmt(p.p)}</div>
-          <span class="etiqueta">${p.destacado?'Destacado':p.nuevo?'Nuevo':''}</span>
+          <div class="precio">${fmt(p.p)}${p.pOrig?' <ant>'+fmt(p.pOrig)+'</ant> <span style="color:var(--savia);font-weight:700">'+dtext+'</span>':''}</div>
         </div>`;
       grid.appendChild(el);
     });

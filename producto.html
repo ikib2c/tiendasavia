@@ -179,7 +179,9 @@ if (!producto) {
   document.getElementById('prodLinea').textContent = producto.linea;
   document.getElementById('prodBreadCat').textContent = producto.linea;
   document.getElementById('prodNombre').textContent = producto.n;
-  document.getElementById('prodPrecio').textContent = new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.p);
+  document.getElementById('prodPrecio').innerHTML = producto.pOrig
+    ? `<span style="font-size:15px;color:var(--texto-secundario);text-decoration:line-through;margin-right:8px">${new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.pOrig)}</span>${new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.p)} <span style="color:var(--savia);font-weight:700;font-size:14px;margin-left:6px">-${Math.round(((producto.pOrig-producto.p)/producto.pOrig)*100)}%</span>`
+    : new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.p);
   document.getElementById('prodDesc').textContent = producto.desc;
   const etiqueta = document.getElementById('prodEtiqueta');
   if (producto.destacado) { etiqueta.style.display='inline-flex'; etiqueta.textContent='Destacado'; }

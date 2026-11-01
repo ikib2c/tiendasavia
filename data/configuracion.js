@@ -1,5 +1,5 @@
 // Configuración pública de la tienda SAVIA (publicada desde el panel de administración).
-// Se aplica a todos los visitantes de https://ikib2c.github.io/tiendasavia/
+// Se aplica a todos los visitantes de https://ikib2c.github.io/tiendasavio/
 window.CONFIG_PUBLICADA = {
     version: 1,
     tienda: {
