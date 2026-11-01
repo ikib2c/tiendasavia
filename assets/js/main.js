@@ -427,6 +427,55 @@
     });
   }
 
+  // ============ Completa tu rutina (clon nvrx nevora) ============
+  function renderNvrx(){
+    const track = $('#nvrxTrack');
+    if(!track) return;
+    const params = new URLSearchParams(location.search);
+    const pid = params.get('id');
+    const actual = catalogo.find(p=>p.id===pid);
+    if(!actual) return;
+
+    // Relacionados: misma categoría primero, luego otras (máx 4)
+    let rel = catalogo.filter(p=>p.id!==actual.id && p.cat===actual.cat);
+    if(rel.length < 4){
+      const extra = catalogo.filter(p=>p.id!==actual.id && p.cat!==actual.cat);
+      rel = rel.concat(extra);
+    }
+    rel = rel.slice(0,4);
+
+    track.innerHTML='';
+    rel.forEach((p,i)=>{
+      const dtext = dtoText(p.p, p.pOrig);
+      const ahorro = (p.pOrig && p.pOrig>p.p) ? p.pOrig-p.p : 0;
+      const card=document.createElement('article');
+      card.className='nvrx-card'+(i===0?' is-featured':'');
+      card.innerHTML = `
+        <a class="nvrx-media" href="producto.html?id=${p.id}" aria-label="Ver ${p.n}">
+          ${p.destacado?`<span class="nvrx-badge">MÁS VENDIDO</span>`:p.nuevo?`<span class="nvrx-badge">NUEVO</span>`:''}
+          ${dtext?`<span class="nvrx-discount">${dtext}</span>`:''}
+          <img src="${p.imgs[0]}" alt="${p.n}" loading="lazy">
+        </a>
+        <div class="nvrx-body">
+          <p class="nvrx-kicker">COMPLETA TU RUTINA</p>
+          <h3><a href="producto.html?id=${p.id}">${p.n}</a></h3>
+          <p class="nvrx-benefit">${p.desc}</p>
+          <div class="nvrx-price-row">
+            <div class="nvrx-price">${fmt(p.p)}${p.pOrig?` <s>${fmt(p.pOrig)}</s>`:''}</div>
+            ${ahorro>0?`<span class="nvrx-saving">Ahorras ${fmt(ahorro)}</span>`:''}
+          </div>
+          <a class="nvrx-cta" href="producto.html?id=${p.id}"><span>Añadir a mi rutina</span><b>→</b></a>
+        </div>`;
+      track.appendChild(card);
+    });
+
+    // Controles prev/next
+    const prev = document.querySelector('.nvrx-controls [data-prev]');
+    const next = document.querySelector('.nvrx-controls [data-next]');
+    if(prev) prev.onclick=()=>track.scrollBy({left:-track.clientWidth*0.8,behavior:'smooth'});
+    if(next) next.onclick=()=>track.scrollBy({left:track.clientWidth*0.8,behavior:'smooth'});
+  }
+
   // Filtros y búsqueda
   function setupFiltros(){
     const input=$('#searchInput');
@@ -446,6 +495,7 @@
     renderProductos();
     renderCategorias();
     renderCarruseles();
+    renderNvrx();
     $('#cartBtn') && $('#cartBtn').addEventListener('click',(e)=>{e.preventDefault();toggleCart();});
     $('#cdCheckout') && $('#cdCheckout').addEventListener('click',(e)=>{e.preventDefault();buildWhatsApp();});
     $('#mmToggle') && $('#mmToggle').addEventListener('click',toggleMM);
