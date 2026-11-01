@@ -358,8 +358,8 @@ footer{border-top:1px solid var(--borde);padding:40px 0 28px;color:var(--texto-s
 /* ============ Formulario COD estilo Releasit ============ */
 .cod-overlay{position:fixed;inset:0;background:rgba(51,58,50,0.45);z-index:100;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(4px)}
 .cod-overlay.open{opacity:1;visibility:visible}
-.cod-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);background:var(--marfil);z-index:110;width:92%;max-width:480px;max-height:90vh;overflow-y:auto;border-radius:18px;box-shadow:0 20px 60px rgba(51,58,50,0.25);transition:transform .35s cubic-bezier(.25,.46,.45,.94);display:flex;flex-direction:column}
-.cod-overlay.open .cod-modal{transform:translate(-50%,-50%) scale(1)}
+.cod-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);opacity:0;visibility:hidden;background:var(--marfil);z-index:110;width:92%;max-width:480px;max-height:90vh;overflow-y:auto;border-radius:18px;box-shadow:0 20px 60px rgba(51,58,50,0.25);transition:transform .35s cubic-bezier(.25,.46,.45,.94),opacity .3s,visibility .3s;display:flex;flex-direction:column}
+.cod-overlay.open~.cod-modal,.cod-modal.open{transform:translate(-50%,-50%) scale(1);opacity:1;visibility:visible}
 .cod-h{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--borde)}
 .cod-h h3{font:600 20px var(--ff-titular);color:var(--grafito);margin:0}
 .cod-close{width:32px;height:32px;border-radius:50%;background:var(--savia-niebla);color:var(--grafito);display:grid;place-items:center;cursor:pointer;font:600 16px var(--ff-titular);transition:background .2s}
