@@ -172,6 +172,7 @@
           <p class="nvc-card__benefit">${p.desc}</p>
           <div class="nvc-card__price">${fmt(p.p)}${p.pOrig?' <ant>'+fmt(p.pOrig)+'</ant>':''}</div>
           <a class="nvc-card__cta" href="producto.html?id=${p.id}">Ver oferta${dtext?' · '+dtext:''}</a>
+          <button class="btn-cod" onclick="abrirCOD('${p.id}')">Pedir contra entrega</button>
         </div>`;
       grid.appendChild(el);
     });
@@ -187,6 +188,114 @@
     if(!track) return;
     const scrollAmount = track.clientWidth * 0.7;
     track.scrollBy({left: scrollAmount * dir, behavior: 'smooth'});
+  }
+
+  // ============ Formulario COD estilo Releasit ============
+  let codProductoId = null;
+  let codCantidad = 1;
+  let codColor = '';
+  let codUpsellIds = new Set();
+
+  function abrirCOD(id){
+    const p = catalogo.find(x=>x.id===id);
+    if(!p) return;
+    codProductoId = id;
+    codCantidad = 1;
+    codColor = Object.keys(p.color||{})[0] || '';
+
+    document.getElementById('codProducto').value = p.n;
+    document.getElementById('codCantidad').value = codCantidad;
+    document.getElementById('codNombre').value = '';
+    document.getElementById('codTelefono').value = '';
+    document.getElementById('codDireccion').value = '';
+    document.getElementById('codCiudad').value = '';
+
+    const colorSel = document.getElementById('codColor');
+    colorSel.innerHTML='';
+    Object.entries(p.color||{}).forEach(([nombre,hex])=>{
+      const o=document.createElement('option');
+      o.value=nombre;
+      o.textContent=nombre + ' (' + hex + ')';
+      if(nombre===codColor) o.selected=true;
+      colorSel.appendChild(o);
+    });
+    codColor = Object.keys(p.color||{})[0] || '';
+
+    // Upsells: productos relacionados (misma categoría, excluyendo el actual)
+    const upsells = document.getElementById('codUpsells');
+    upsells.innerHTML='';
+    const relacionados = catalogo.filter(x=>x.cat===p.cat && x.id!==id).slice(0,3);
+    relacionados.forEach(r=>{
+      const item=document.createElement('div');
+      item.className='cod-upsell-item';
+      item.innerHTML = `
+        <input type="checkbox" id="upsell-${r.id}" value="${r.id}">
+        <div class="cod-upsell-img">📦</div>
+        <div class="cod-upsell-info">
+          <span class="cod-upsell-tit">${r.n}</span>
+          <span class="cod-upsell-pre">${fmt(r.p)}</span>
+        </div>
+      `;
+      const chk = item.querySelector('input');
+      chk.onchange=(e)=>{
+        if(e.target.checked) codUpsellIds.add(r.id); else codUpsellIds.delete(r.id);
+      };
+      upsells.appendChild(item);
+    });
+
+    const overlay=$('#codOverlay'), modal=$('#codModal');
+    if(overlay&&modal){ overlay.classList.add('open'); modal.classList.add('open'); document.body.classList.add('noscroll'); }
+  }
+
+  function cerrarCOD(){
+    const overlay=$('#codOverlay'), modal=$('#codModal');
+    if(overlay&&modal){ overlay.classList.remove('open'); modal.classList.remove('open'); document.body.classList.remove('noscroll'); }
+  }
+
+  function enviarCOD(){
+    const nombre=document.getElementById('codNombre').value.trim();
+    const telefono=document.getElementById('codTelefono').value.trim();
+    const direccion=document.getElementById('codDireccion').value.trim();
+    const ciudad=document.getElementById('codCiudad').value.trim();
+    const cantidad=document.getElementById('codCantidad').value;
+    const color=document.getElementById('codColor').value;
+
+    if(!nombre||!telefono||!direccion||!ciudad){
+      alert('Por favor completa todos los campos.');
+      return;
+    }
+
+    const p = catalogo.find(x=>x.id===codProductoId);
+    if(!p) return;
+
+    const wa = cfg.tienda && cfg.tienda.whatsappPedidos ? cfg.tienda.whatsappPedidos : '573007579993';
+    let texto = `*Nuevo pedido COD (Releasit)*%0A%0A`;
+    texto += `*Cliente:* ${nombre}%0A`;
+    texto += `*Teléfono:* ${telefono}%0A`;
+    texto += `*Dirección:* ${direccion}, ${ciudad}%0A%0A`;
+    texto += `*Producto:* ${p.n}%0A`;
+    texto += `*Color:* ${color}%0A`;
+    texto += `*Cantidad:* ${cantidad}%0A`;
+    texto += `*Precio unitario:* ${fmt(p.p)}%0A`;
+    texto += `*Subtotal:* ${fmt(p.p*cantidad)}%0A%0A`;
+    if(codUpsellIds.size>0){
+      texto += `*Productos adicionales:*%0A`;
+      let upSub=0;
+      codUpsellIds.forEach(uid=>{
+        const up=catalogo.find(x=>x.id===uid);
+        if(up){ texto += `- ${up.n} — ${fmt(up.p)}%0A`; upSub+=up.p; }
+      });
+      texto += `*Subtotal upsells:* ${fmt(upSub)}%0A%0A`;
+      texto += `*Total:* ${fmt(p.p*cantidad + upSub)}%0A%0A`;
+    } else {
+      texto += `*Total:* ${fmt(p.p*cantidad)}%0A%0A`;
+    }
+    texto += `*Método de pago:* Contra entrega%0A%0A`;
+    texto += `Quisiera proceder con el pago contra entrega.`;
+
+    location.href = `https://wa.me/${wa}?text=${texto}`;
+    cerrarCOD();
+    codUpsellIds = new Set();
   }
 
   // ============ Categorías (burbujas estilo nevora) ============
@@ -271,6 +380,10 @@
     window.cambiarCantidad=cambiarCantidad;
     window.eliminarItem=eliminarItem;
     window.agregarAlCarrito=agregarAlCarrito;
+    window.abrirCOD=abrirCOD;
+    window.cerrarCOD=cerrarCOD;
+    window.enviarCOD=enviarCOD;
+    $('#codBtnEnviar') && $('#codBtnEnviar').addEventListener('click',enviarCOD);
   });
 
   // Exponer para uso inline en producto.html

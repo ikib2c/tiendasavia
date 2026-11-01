@@ -323,6 +323,55 @@
   </div>
 </div>
 
+<!-- Formulario COD estilo Releasit -->
+<div class="cod-overlay" id="codOverlay" onclick="cerrarCOD()"></div>
+<div class="cod-modal" id="codModal">
+  <div class="cod-h">
+    <h3>Pedir contra entrega</h3>
+    <button class="cod-close" onclick="cerrarCOD()">✕</button>
+  </div>
+  <div class="cod-body">
+    <form id="codForm">
+      <div class="cod-field">
+        <label>Nombre completo</label>
+        <input type="text" id="codNombre" placeholder="Juan Pérez" required>
+      </div>
+      <div class="cod-field">
+        <label>Teléfono de contacto</label>
+        <input type="tel" id="codTelefono" placeholder="+57 300 000 0000" required>
+      </div>
+      <div class="cod-field">
+        <label>Dirección de envío</label>
+        <input type="text" id="codDireccion" placeholder="Calle 123 #45-67" required>
+      </div>
+      <div class="cod-field">
+        <label>Ciudad</label>
+        <input type="text" id="codCiudad" placeholder="Bogotá" required>
+      </div>
+      <div class="cod-field">
+        <label>Producto</label>
+        <input type="text" id="codProducto" readonly>
+      </div>
+      <div class="cod-field">
+        <label>Cantidad</label>
+        <input type="number" id="codCantidad" value="1" min="1" max="99">
+      </div>
+      <div class="cod-field">
+        <label>Color del envase</label>
+        <select id="codColor"></select>
+      </div>
+      <div class="cod-upsell">
+        <h4>¿Agregar un producto más?</h4>
+        <div id="codUpsells"></div>
+      </div>
+    </form>
+  </div>
+  <div class="cod-actions">
+    <button class="cod-btn-cerrar" onclick="cerrarCOD()">Cerrar</button>
+    <button class="cod-btn-cod" id="codBtnEnviar">Pedir contra entrega</button>
+  </div>
+</div>
+
 <script src="data/configuracion.js"></script>
 <script src="data/catalogo.js"></script>
 <script src="assets/js/main.js"></script>

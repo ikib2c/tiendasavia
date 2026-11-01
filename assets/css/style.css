@@ -355,6 +355,40 @@ footer{border-top:1px solid var(--borde);padding:40px 0 28px;color:var(--texto-s
   .btn-add{width:100%}
 }
 
+/* ============ Formulario COD estilo Releasit ============ */
+.cod-overlay{position:fixed;inset:0;background:rgba(51,58,50,0.45);z-index:100;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(4px)}
+.cod-overlay.open{opacity:1;visibility:visible}
+.cod-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);background:var(--marfil);z-index:110;width:92%;max-width:480px;max-height:90vh;overflow-y:auto;border-radius:18px;box-shadow:0 20px 60px rgba(51,58,50,0.25);transition:transform .35s cubic-bezier(.25,.46,.45,.94);display:flex;flex-direction:column}
+.cod-overlay.open .cod-modal{transform:translate(-50%,-50%) scale(1)}
+.cod-h{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--borde)}
+.cod-h h3{font:600 20px var(--ff-titular);color:var(--grafito);margin:0}
+.cod-close{width:32px;height:32px;border-radius:50%;background:var(--savia-niebla);color:var(--grafito);display:grid;place-items:center;cursor:pointer;font:600 16px var(--ff-titular);transition:background .2s}
+.cod-close:hover{background:var(--savia);color:var(--blanco)}
+.cod-body{padding:20px 24px;flex:1}
+.cod-field{margin-bottom:16px}
+.cod-field label{display:block;font:500 13px var(--ff-cuerpo);color:var(--texto-secundario);margin-bottom:6px}
+.cod-field input, .cod-field select{width:100%;border:1.5px solid var(--borde);border-radius:10px;background:var(--blanco);color:var(--grafito);padding:11px 14px;font:inherit}
+.cod-field input:focus, .cod-field select:focus{outline:none;border-color:var(--savia)}
+.cod-field input::placeholder{color:rgba(51,58,50,0.45)}
+.cod-upsell{margin-bottom:16px;padding:14px;background:var(--savia-suave);border-radius:14px}
+.cod-upsell h4{font:600 15px var(--ff-titular);color:var(--grafito);margin:0 0 10px}
+.cod-upsell-item{display:flex;gap:10px;align-items:center;cursor:pointer;border:1px solid transparent;border-radius:10px;padding:8px;transition:all .2s}
+.cod-upsell-item:hover{border-color:var(--savia);background:rgba(83,107,80,0.05)}
+.cod-upsell-item input{margin-top:2px}
+.cod-upsell-img{width:40px;height:40px;border-radius:8px;background:var(--savia-niebla);flex:none;display:grid;place-items:center;font-size:20px}
+.cod-upsell-info{flex:1;min-width:0}
+.cod-upsell-tit{font:500 13px var(--ff-cuerpo);color:var(--grafito);display:block;margin-bottom:2px}
+.cod-upsell-pre{font:600 12px var(--ff-cuerpo);color:var(--savia)}
+.cod-actions{display:flex;gap:12px;padding:20px 24px;border-top:1px solid var(--borde);background:var(--fondo-secundario);border-radius:0 0 18px 18px}
+.cod-btn-cod{flex:1;background:var(--savia);border-color:var(--savia);color:var(--blanco);font:600 15px var(--ff-cuerpo);min-height:48px;border-radius:12px;cursor:pointer}
+.cod-btn-cod:hover{box-shadow:var(--sombra)}
+.cod-btn-cerrar{flex:0 0 auto;background:transparent;color:var(--texto-secundario);border:1.5px solid var(--borde);font:600 14px var(--ff-cuerpo);min-height:48px;border-radius:12px;cursor:pointer}
+.cod-btn-cerrar:hover{background:rgba(51,58,50,0.06)}
+
+/* Botón rápido COD en tarjetas */
+.btn-cod{display:inline-flex;align-items:center;gap:6px;background:var(--savia-suave);color:var(--savia);border:1.5px solid var(--savia);font:600 12px var(--ff-cuerpo);padding:6px 14px;border-radius:var(--radio-pill);margin-top:8px;cursor:pointer;transition:all .2s}
+.btn-cod:hover{background:var(--savia);color:var(--blanco)}
+
 /* Utilidades */
 .center{text-align:center}
 .suave{color:var(--texto-secundario)}
