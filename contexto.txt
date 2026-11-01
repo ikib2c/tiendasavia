@@ -1,0 +1,14 @@
+lee todo el siguiente sitio literal en su html, css, js, etc, diseño, etc, todo completamente, en especial home y pagina de producto:
+
+Home
+https://nevora.com.co/collections/all
+
+Pagina de producto
+https://nevora.com.co/products/candida-cleanse?_pos=1&_psq=candela&_psid=f3e4b2989&_ss=e
+
+
+Nna vez leas todo el sitio en mencion actualizalo con el brief de branding del proyecto savia
+
+luego inspirado en index de https://github.com/ikib2c/iki especialmente el home del proyecto IKI, adaptalo en la pagina de producto con el nuevo brief, una vez termines guardar en el reposito, cada pagina de producto depermitir personalizacion de colores asociados al producto que se publique en esa pagina de producto
+
+https://github.com/ikib2c/tiendasavia

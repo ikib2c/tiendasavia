@@ -7,3 +7,7 @@ dist/
 build/
 
 Token_Contents.txt
+
+# Archivos de referencia descargados de nevora.com.co (no son parte del sitio)
+*Nevora*.html
+
