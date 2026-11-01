@@ -323,7 +323,7 @@ footer{border-top:1px solid var(--borde);padding:40px 0 28px;color:var(--texto-s
 /* ============ Carrito flotante ============ */
 .cd-overlay{position:fixed;inset:0;background:rgba(51,58,50,0.35);z-index:50;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(3px)}
 .cd-overlay.open{opacity:1;visibility:visible}
-.cd-panel{position:fixed;inset:0 40% 0 0;background:var(--marfil);z-index:55;transform:translateX(-105%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);box-shadow:14px 0 40px rgba(51,58,50,0.18);display:flex;flex-direction:column}
+.cd-panel{position:fixed;inset:0 0 0 40%;background:var(--marfil);z-index:55;transform:translateX(105%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);box-shadow:-14px 0 40px rgba(51,58,50,0.18);display:flex;flex-direction:column;max-width:420px;width:100%}
 .cd-panel.open{transform:none}
 .cd-h{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--borde)}
 .cd-h h3{font:600 18px var(--ff-titular);color:var(--grafito)}
