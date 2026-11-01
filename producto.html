@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">Producto · SAVIA</title>
+<meta name="description" content="Ficha de producto SAVIA. Skincare botánico contemporáneo con personalización de colores.">
+<meta property="og:type" content="product">
+<meta name="theme-color" content="#536B50">
+<link rel="icon" href="favicon.svg" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"OnlineStore","name":"SAVIA","slogan":"Tu piel, en su mejor esencia.","url":"https://ikib2c.github.io/tiendasavio/","areaServed":{"@type":"Country","name":"Colombia"}}</script>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Ir al contenido</a>
+
+<div class="topbar">Envío gratis en toda Colombia&nbsp;·&nbsp;Pago contra entrega&nbsp;·&nbsp;Skincare botánico</div>
+
+<header id="header">
+  <div class="hd">
+    <a class="brand" href="index.html">
+      <img src="img/logo-savia.svg" alt="SAVIA">
+      <span class="bt">SAVIA<br><span style="font:400 10px/1.2 'DM Sans',sans-serif;color:#6b645a;display:block;margin-top:2px">Skincare botánico</span></span>
+    </a>
+    <div class="search">
+      <input type="search" id="searchInput" placeholder="Buscar productos" aria-label="Buscar productos">
+    </div>
+    <div class="hicons">
+      <button class="ib" id="cartBtn" aria-label="Ver carrito" onclick="toggleCart()"><svg class="ic" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8zM9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mm" id="mm">
+  <div class="mm-head">
+    <span class="mm-title">SAVIA</span>
+    <button class="ib" onclick="closeMM()" style="background:none">✕</button>
+  </div>
+  <ul class="mm-list">
+    <li><button onclick="closeMM();window.location.href='index.html'">Inicio</button></li>
+    <li><button onclick="closeMM();window.location.href='index.html#tienda'">Catálogo</button></li>
+    <li><button onclick="closeMM();window.location.href='index.html#contacto'">Contacto</button></li>
+  </ul>
+  <div class="mm-foot">
+    <a class="mm-wa" href="https://wa.me/573007579993?text=Hola%20SAVIA,%20quiero%20una%20recomendaci%C3%B3n" target="_blank">Pedir por WhatsApp</a>
+  </div>
+</div>
+
+<main id="contenido">
+  <section class="producto">
+    <div class="producto-wrap">
+      <!-- Galería -->
+      <div class="producto-galeria">
+        <div class="ph" id="fotoPrincipal">
+          <img id="imgPrincipal" src="img/p/placeholder.svg" alt="">
+        </div>
+        <div class="miniaturas" id="miniaturas"></div>
+      </div>
+
+      <!-- Información -->
+      <div class="producto-info">
+        <span class="linea" id="prodLinea">Línea</span>
+        <h1 id="prodNombre">Nombre del producto</h1>
+        <div class="etiqueta chip-line" id="prodEtiqueta" style="display:none">Destacado</div>
+        <div class="precio" id="prodPrecio">$0</div>
+        <p class="desc" id="prodDesc">Descripción del producto.</p>
+
+        <!-- Personalización de colores -->
+        <div class="color-picker">
+          <label>Color del envase</label>
+          <div class="color-options" id="colorOptions"></div>
+        </div>
+
+        <div class="actions">
+          <div class="qty">
+            <button type="button" onclick="cambiarCantidad(this,-1)">−</button>
+            <input type="number" id="qty" value="1" min="1" max="99" readonly>
+            <button type="button" onclick="cambiarCantidad(this,1)">+</button>
+          </div>
+          <button class="btn-add" id="btnAdd" onclick="agregarAlCarrito()">Agregar al carrito</button>
+        </div>
+        <button class="btn-wa" id="btnWa" style="margin-top:10px;width:100%">Comprar por WhatsApp</button>
+
+        <div class="tabs">
+          <button class="tab-btn active" onclick="abrirTab(this,'descripcion')">Descripción</button>
+          <button class="tab-btn" onclick="abrirTab(this,'ingredientes')">Ingredientes</button>
+          <button class="tab-btn" onclick="abrirTab(this,'modo-uso')">Modo de uso</button>
+          <button class="tab-btn" onclick="abrirTab(this,'beneficios')">Beneficios</button>
+        </div>
+        <div id="tab-descripcion" class="tab-panel active"></div>
+        <div id="tab-ingredientes" class="tab-panel"></div>
+        <div id="tab-modo-uso" class="tab-panel"></div>
+        <div id="tab-beneficios" class="tab-panel"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>SAVIA</h5>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#tienda">Catálogo</a></li>
+          <li><a href="index.html#rutinas">Rutinas</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Tienda</h5>
+        <ul>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Síguenos</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/nevora.health/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@nevora55" target="_blank">TikTok</a></li>
+          <li><a href="https://wa.me/573007579993" target="_blank">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 SAVIA · Skincare botánico contemporáneo · Hecho con ♥ en Colombia</div>
+  </div>
+</footer>
+
+<!-- Carrito flotante -->
+<div class="cd-overlay" id="cdOverlay" onclick="toggleCart()"></div>
+<div class="cd-panel" id="cdPanel">
+  <div class="cd-h"><h3>Tu carrito</h3><button class="ib" onclick="toggleCart()">✕</button></div>
+  <div class="cd-body" id="cdBody">
+    <div class="cd-empty" id="cdEmpty">Tu carrito está vacío.</div>
+    <div class="cd-items" id="cdItems"></div>
+    <div class="cd-total" id="cdTotal" style="display:none">
+      <div style="display:flex;justify-content:space-between;font:600 15px var(--ff-titular);color:var(--grafito);margin:0 0 12px">
+        <span>Subtotal</span><span id="cdSubtotal">$0</span>
+      </div>
+      <div class="cd-pagos">
+        <div style="font-size:12px;color:var(--texto-secundario);margin-bottom:8px">Formas de pago</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">PSE</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Nequi</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Bancolombia</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Visa</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Mastercard</span>
+        </div>
+      </div>
+      <button class="btn savia" id="cdCheckout" style="width:100%;margin-top:10px">Pedir por WhatsApp</button>
+      <div style="font-size:12px;color:var(--texto-secundario);text-align:center;margin-top:8px">Sin pagar nada por adelantado</div>
+    </div>
+  </div>
+</div>
+
+<script src="data/configuracion.js"></script>
+<script src="data/catalogo.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+/* Lectura del producto desde la URL (?id=p01) y renderizado de la ficha */
+const params = new URLSearchParams(location.search);
+const pid = params.get('id');
+const producto = window.CATALOGO_SAVIA && window.CATALOGO_SAVIA.find(p => p.id === pid);
+
+if (!producto) {
+  document.getElementById('contenido').innerHTML = '<div style="padding:40px;text-align:center"><h2>Producto no encontrado</h2><p>El producto solicitado no existe.</p><a href="../index.html" class="btn savia">Volver al catálogo</a></div>';
+} else {
+  document.title = producto.n + ' · SAVIA';
+  document.getElementById('pageTitle').textContent = producto.n + ' · SAVIA';
+  document.getElementById('prodLinea').textContent = producto.linea;
+  document.getElementById('prodNombre').textContent = producto.n;
+  document.getElementById('prodPrecio').textContent = new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(producto.p);
+  document.getElementById('prodDesc').textContent = producto.desc;
+  const etiqueta = document.getElementById('prodEtiqueta');
+  if (producto.destacado) { etiqueta.style.display='inline-flex'; etiqueta.textContent='Destacado'; }
+  if (producto.nuevo) { etiqueta.style.display='inline-flex'; etiqueta.textContent='Nuevo'; }
+
+  const imgPrincipal = document.getElementById('imgPrincipal');
+  const miniaturas = document.getElementById('miniaturas');
+  producto.imgs.forEach((src,i)=>{
+    const m = document.createElement('img');
+    m.src = src; m.alt = producto.n; m.className='mini'+(i===0?' active':'');
+    m.onclick=()=>{ imgPrincipal.src=src; document.querySelectorAll('#miniaturas img').forEach(x=>x.classList.remove('active')); m.classList.add('active'); };
+    miniaturas.appendChild(m);
+  });
+  if(producto.imgs.length) imgPrincipal.src=producto.imgs[0];
+
+  // Personalización de colores
+  const colorOptions = document.getElementById('colorOptions');
+  let colorSeleccionado = Object.keys(producto.color)[0];
+  Object.entries(producto.color).forEach(([nombre,hex])=>{
+    const chip = document.createElement('div');
+    chip.className='color-chip'+(nombre===colorSeleccionado?' active':'');
+    chip.style.background=hex;
+    chip.title=nombre;
+    chip.onclick=()=>{
+      colorSeleccionado=nombre;
+      document.querySelectorAll('.color-chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      actualizarWhatsApp();
+    };
+    colorOptions.appendChild(chip);
+  });
+
+  // Tabs
+  window.abrirTab = function(btn, id){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+id).classList.add('active');
+  };
+  document.getElementById('tab-descripcion').textContent = producto.desc;
+  document.getElementById('tab-ingredientes').innerHTML = '<h4>Ingredientes</h4><p>'+producto.ingredientes+'</p>';
+  document.getElementById('tab-modo-uso').innerHTML = '<h4>Modo de uso</h4><p>'+producto.uso+'</p>';
+  document.getElementById('tab-beneficios').innerHTML = '<h4>Beneficios</h4><ul>'+producto.beneficios.map(b=>'<li>'+b+'</li>').join('')+'</ul>';
+
+  // JSON-LD producto
+  const ld = {"@context":"https://schema.org","@type":"Product","name":producto.n,"image":producto.imgs[0],"description":producto.desc,"brand":{"@type":"Brand","name":"SAVIA"},"offers":{"@type":"Offer","price":String(producto.p),"priceCurrency":"COP","availability":"https://schema.org/InStock"}};
+  const existing = document.querySelector('script[type="application/ld+json"]');
+  if(existing) existing.remove();
+  const s = document.createElement('script'); s.type='application/ld+json'; s.text=JSON.stringify(ld); document.head.appendChild(s);
+
+  // WhatsApp dinámico con color seleccionado
+  function actualizarWhatsApp(){
+    const wa = document.getElementById('btnWa');
+    const qty = document.getElementById('qty').value;
+    const texto = `Hola SAVIA, me interesa el producto "${producto.n}" (color del envase: ${colorSeleccionado}), cantidad ${qty}.`;
+    wa.href = `https://wa.me/${window.CONFIG_PUBLICADA.tienda.whatsappPedidos}?text=${encodeURIComponent(texto)}`;
+  }
+  document.getElementById('qty').addEventListener('input', actualizarWhatsApp);
+  actualizarWhatsApp();
+}
+</script>
+</body>
+</html>

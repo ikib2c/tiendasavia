@@ -1,0 +1,4 @@
+Sitemap: https://ikib2c.github.io/tiendasavio/sitemap.xml
+User-agent: *
+Allow: /
+Disallow:

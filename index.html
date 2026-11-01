@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAVIA — Tu piel, en su mejor esencia.</title>
+<meta name="description" content="Skincare botánico contemporáneo. Nutrir, proteger y acompañar tu piel mediante rutinas conscientes y productos bien formulados. Envío gratis y pago contra entrega en Colombia.">
+<meta property="og:title" content="SAVIA — Tu piel, en su mejor esencia.">
+<meta property="og:description" content="Skincare botánico contemporáneo. Nutrir, proteger y acompañar tu piel mediante rutinas conscientes y productos bien formulados.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta name="theme-color" content="#536B50">
+<link rel="icon" href="favicon.svg" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"OnlineStore","name":"SAVIA","slogan":"Tu piel, en su mejor esencia.","url":"https://ikib2c.github.io/tiendasavio/","areaServed":{"@type":"Country","name":"Colombia"}}</script>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#tienda">Ir a los productos</a>
+
+<div class="topbar">Envío gratis en toda Colombia&nbsp;·&nbsp;Pago contra entrega&nbsp;·&nbsp;Productos importados premium&nbsp;·&nbsp;Skincare botánico</div>
+
+<header id="header">
+  <div class="hd">
+    <a class="brand" href="#">
+      <img src="img/logo-savia.svg" alt="SAVIA">
+      <span class="bt">SAVIA<br><span style="font:400 10px/1.2 'DM Sans',sans-serif;color:#6b645a;display:block;margin-top:2px">Skincare botánico</span></span>
+    </a>
+    <div class="search">
+      <input type="search" id="searchInput" placeholder="Buscar productos" aria-label="Buscar productos">
+    </div>
+    <div class="hicons">
+      <button class="ib" id="cartBtn" aria-label="Ver carrito" onclick="toggleCart()"><svg class="ic" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8zM9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="badge" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<button class="mm-toggle" id="mmToggle" aria-label="Abrir menú" style="display:none">☰</button>
+
+<div class="mm" id="mm">
+  <div class="mm-head">
+    <span class="mm-title">SAVIA</span>
+    <button class="ib" onclick="closeMM()" style="background:none">✕</button>
+  </div>
+  <ul class="mm-list">
+    <li><button onclick="closeMM();window.location.href='/'">Inicio</button></li>
+    <li><button onclick="closeMM();window.location.href='#tienda'">Catálogo</button></li>
+    <li><button onclick="closeMM();window.location.href='#rutinas'">Rutinas por necesidad</button></li>
+    <li><button onclick="closeMM();window.location.href='#contacto'">Contacto</button></li>
+  </ul>
+  <div class="mm-foot">
+    <a class="mm-wa" href="https://wa.me/573007579993?text=Hola%20SAVIA,%20quiero%20una%20recomendaci%C3%B3n" target="_blank">Pedir por WhatsApp</a>
+  </div>
+</div>
+
+<main>
+  <!-- Héroe -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Skincare botánico contemporáneo</span>
+      <h1>Tu piel,<br>en su <em>mejor esencia</em>.</h1>
+      <p class="lead">Descubre una forma consciente de cuidar tu piel con SAVIA. Productos bien formulados, información transparente y una experiencia digital sencilla.</p>
+      <div class="hero-cta">
+        <a href="#tienda" class="btn savia">Descubre SAVIA</a>
+        <a href="#rutinas" class="btn outline">Ver rutinas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Presentación de SAVIA -->
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">Presentación de SAVIA</h2>
+      <p class="section-sub">La savia es la esencia vital que nutre y sostiene a las plantas. SAVIA toma esa idea como metáfora del cuidado de la piel: nutrir, proteger y acompañar sus necesidades mediante rutinas conscientes y productos bien formulados.</p>
+      <div class="grid-productos" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px">
+        <div class="rutina-card" style="background:var(--savia-niebla);border:none">
+          <div class="icon" style="background:var(--arena);color:#3a2e22">🌿</div>
+          <h4>Naturalidad</h4>
+          <p>Inspiración en la riqueza de la naturaleza, sin promesas exageradas.</p>
+        </div>
+        <div class="rutina-card" style="background:var(--savia-niebla);border:none">
+          <div class="icon" style="background:var(--savia-suave);color:var(--savia)">✨</div>
+          <h4>Transparencia</h4>
+          <p>Información clara sobre ingredientes, uso y beneficios.</p>
+        </div>
+        <div class="rutina-card" style="background:var(--savia-niebla);border:none">
+          <div class="icon" style="background:var(--savia-suave);color:var(--savia)">🤝</div>
+          <h4>Confianza</h4>
+          <p>Calidad y respaldo verificables a precios razonables.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos destacados -->
+  <section id="tienda" class="section">
+    <div class="wrap">
+      <div class="chead">
+        <span class="clab">Productos destacados</span>
+        <span class="cmeta" id="productsCount">81 productos</span>
+      </div>
+      <div class="grid-productos" id="productGrid"></div>
+      <div class="center" style="margin-top:22px">
+        <button class="btn outline" onclick="cargarMas()" id="btnCargarMas">Cargar más productos</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rutinas por necesidad -->
+  <section id="rutinas" class="section rutinas">
+    <div class="wrap">
+      <h2 class="section-title">Rutinas por necesidad de tu piel</h2>
+      <p class="section-sub">Encuentra una rutina que acompañe las necesidades de tu piel.</p>
+      <div class="rutinas-grid">
+        <div class="rutina-card">
+          <div class="icon">🧼</div>
+          <h4>Limpieza facial</h4>
+          <p>Elimina impurezas sin resecar, ideal para iniciar tu rutina diaria.</p>
+          <a href="#tienda?cat=limpieza" class="btn savia" style="width:100%;font-size:13px;padding:0 14px">Ver limpiadores</a>
+        </div>
+        <div class="rutina-card">
+          <div class="icon">💧</div>
+          <h4>Hidratación</h4>
+          <p>Restaura la barrera cutánea y brinda luminosidad duradera.</p>
+          <a href="#tienda?cat=hidratacion" class="btn savia" style="width:100%;font-size:13px;padding:0 14px">Ver hidratantes</a>
+        </div>
+        <div class="rutina-card">
+          <div class="icon">✨</div>
+          <h4>Tratamientos</h4>
+          <p>Sérums concentrados que iluminan y protegen la piel.</p>
+          <a href="#tienda?cat=tratamiento" class="btn savia" style="width:100%;font-size:13px;padding:0 14px">Ver sérums</a>
+        </div>
+        <div class="rutina-card">
+          <div class="icon">☀️</div>
+          <h4>Protección solar</h4>
+          <p>Amplio espectro con acabado mate, último paso de tu rutina diurna.</p>
+          <a href="#tienda?cat=proteccion" class="btn savia" style="width:100%;font-size:13px;padding:0 14px">Ver protectores</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="wrap">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-q">¿Cuánto tarda el envío?<span>▾</span></div>
+          <div class="faq-a">Envíos a toda Colombia. Tiempo de entrega estimado de 2 a 5 días hábiles según tu ciudad.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Puedo pagar contra entrega?<span>▾</span></div>
+          <div class="faq-a">Sí. Contamos con pago contra entrega en toda Colombia y también pago en línea con 10% de descuento.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Los productos son aptos para todo tipo de piel?<span>▾</span></div>
+          <div class="faq-a">Cada ficha de producto indica su uso recomendado. Si tienes dudas, escríbenos por WhatsApp para una recomendación personalizada.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">¿Cómo elijo mi rutina?<span>▾</span></div>
+          <div class="faq-a">Explora nuestras rutinas por necesidad o contáctanos por WhatsApp y te ayudamos a armar la tuya.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="section">
+    <div class="wrap">
+      <div class="contacto">
+        <div class="card">
+          <h3>¿Necesitas ayuda?</h3>
+          <p>Resolvemos dudas sobre productos, pedidos y envíos desde un solo canal.</p>
+          <p><strong>Horario de atención:</strong><br>Lunes – Viernes 8:00 am – 6:00 pm<br>Sábado 9:00 am – 2:00 pm · Domingo Cerrado</p>
+          <a class="btn savia" href="https://wa.me/573007579993?text=Hola%20SAVIA,%20quiero%20una%20recomendaci%C3%B3n" target="_blank">Escribenos por WhatsApp</a>
+        </div>
+        <form class="card" id="contactForm">
+          <h3>Contáctanos</h3>
+          <input type="text" placeholder="Nombre" required>
+          <input type="email" placeholder="Correo electrónico" required>
+          <select><option>Motivo de consulta</option><option>Producto</option><option>Pedido</option><option>Otro</option></select>
+          <textarea rows="4" placeholder="Tu mensaje" required></textarea>
+          <button class="btn savia" type="submit">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>SAVIA</h5>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#tienda">Catálogo</a></li>
+          <li><a href="#rutinas">Rutinas</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Tienda</h5>
+        <ul>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Síguenos</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/nevora.health/" target="_blank">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@nevora55" target="_blank">TikTok</a></li>
+          <li><a href="https://wa.me/573007579993" target="_blank">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 SAVIA · Skincare botánico contemporáneo · Hecho con ♥ en Colombia</div>
+  </div>
+</footer>
+
+<!-- Carrito flotante -->
+<div class="cd-overlay" id="cdOverlay" onclick="toggleCart()"></div>
+<div class="cd-panel" id="cdPanel">
+  <div class="cd-h"><h3>Tu carrito</h3><button class="ib" onclick="toggleCart()">✕</button></div>
+  <div class="cd-body" id="cdBody">
+    <div class="cd-empty" id="cdEmpty">Tu carrito está vacío.</div>
+    <div class="cd-items" id="cdItems"></div>
+    <div class="cd-total" id="cdTotal" style="display:none">
+      <div style="display:flex;justify-content:space-between;font:600 15px var(--ff-titular);color:var(--grafito);margin:0 0 12px">
+        <span>Subtotal</span><span id="cdSubtotal">$0</span>
+      </div>
+      <div class="cd-pagos">
+        <div style="font-size:12px;color:var(--texto-secundario);margin-bottom:8px">Formas de pago</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">PSE</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Nequi</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Bancolombia</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Visa</span>
+          <span style="font-size:10px;border:1px solid var(--borde);color:var(--texto-secundario);padding:3px 8px;border-radius:6px">Mastercard</span>
+        </div>
+      </div>
+      <button class="btn savia" id="cdCheckout" style="width:100%;margin-top:10px">Pedir por WhatsApp</button>
+      <div style="font-size:12px;color:var(--texto-secundario);text-align:center;margin-top:8px">Sin pagar nada por adelantado</div>
+    </div>
+  </div>
+</div>
+
+<script src="data/configuracion.js"></script>
+<script src="data/catalogo.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

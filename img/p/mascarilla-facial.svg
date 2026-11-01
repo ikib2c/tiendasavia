@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750">
+ <rect width="600" height="750" fill="#333A32"/>
+ <circle cx="300" cy="320" r="110" fill="rgba(255,255,255,0.25)"/>
+ <path d="M240 460 Q300 540 360 460" stroke="rgba(255,255,255,0.35)" stroke-width="14" fill="none" stroke-linecap="round"/>
+ <text x="300" y="680" text-anchor="middle" font-family="DM Sans,Cormorant Garamond,serif" font-size="20" font-weight="600" fill="rgba(255,255,255,0.9)">SAVIA</text>
+ <text x="300" y="710" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="rgba(255,255,255,0.6)">mascarilla-facial</text>
+</svg>
